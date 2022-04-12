@@ -23,4 +23,12 @@ router.get('/books', asyncHandler(async(req,res) =>{
   res.render('index', {books})
 }));
 
+router.get('/books/new', asyncHandler(async(req,res) =>{
+  res.render('new-book');
+}));
+
+router.post('/books/new',asyncHandler(async(req,res) =>{
+  
+}));
+
 module.exports = router;
