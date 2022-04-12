@@ -24,11 +24,19 @@ router.get('/books', asyncHandler(async(req,res) =>{
 }));
 
 router.get('/books/new', asyncHandler(async(req,res) =>{
-  res.render('new-book');
+  res.render('new-book')
 }));
 
 router.post('/books/new',asyncHandler(async(req,res) =>{
-  
+  const book = await Book.create(req.body);
+  console.log(req.body);
+  res.redirect('/books')
+}));
+
+router.get('/books/:id', asyncHandler(async(req,res) =>{
+  const book = await Book.findByPk(req.params.id);
+  console.log(book.toJSON())
+  res.render('update-book', { book })
 }));
 
 module.exports = router;
