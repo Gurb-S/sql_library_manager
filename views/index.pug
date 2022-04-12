@@ -1,9 +1,10 @@
-//- extends layout
+extends layout.pug 
 
 block content 
-  h1= Books
+
+  h1 Books
   p 
-    a(class="button" href="/books/new") Create New Book 
+    a.button(href="/books/new") Create New Book 
   table 
     tr 
       th Title 
