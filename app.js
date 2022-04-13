@@ -15,6 +15,13 @@ var app = express();
   try {
     sequelize.sync();
     await sequelize.authenticate();
+    // const book = await Book.create({
+    //   title: "bob",
+    //   author: 'tom',
+    //   genre: "told",
+    //   year: 2001
+    // })
+    // console.log(book.toJSON())
     console.log("IT WORKED!!!!!!!!!")
   } catch (error) {
     console.log('HOUSTON WE GOT A PROBLEM', error);
