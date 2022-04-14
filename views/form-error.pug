@@ -1,6 +1,6 @@
 if errorsPath 
-  h1 Ooooops!! 
+  h1.error Ooooops!! 
   if errorsPath[0] === 'title'
-    h2 Title is required 
+    p.error Title is required 
   if errorsPath[0] === 'author' || errorsPath[1] === 'author'
-    h2 Author is required 
+    p.error Author is required 
