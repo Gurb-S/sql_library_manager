@@ -15,13 +15,6 @@ var app = express();
   try {
     sequelize.sync();
     await sequelize.authenticate();
-    // const book = await Book.create({
-    //   title: "bob",
-    //   author: 'tom',
-    //   genre: "told",
-    //   year: 2001
-    // })
-    // console.log(book.toJSON())
     console.log("IT WORKED!!!!!!!!!")
   } catch (error) {
     console.log('HOUSTON WE GOT A PROBLEM', error);
@@ -39,7 +32,6 @@ app.use(cookieParser());
 app.use('/static', express.static('public'));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
