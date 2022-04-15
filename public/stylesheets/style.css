@@ -10,9 +10,9 @@ a {
   transition: 0.4s;
 }
 
-  a:hover {
-    color: black;
-  }
+a:hover {
+  color: black;
+}
 
 a.button, input[type=submit] {
   color: white;
@@ -33,9 +33,9 @@ input[type=submit] {
   border: 0;
 }
 
-  a.button:hover, input[type=submit]:hover {
-    background-color: #01b189;
-  }
+a.button:hover, input[type=submit]:hover {
+  background-color: #01b189;
+}
 
 p {
   margin: 20px auto;
@@ -94,4 +94,15 @@ input[type=text] {
 
 .error {
   color: rgb(236, 15, 15);
+}
+
+.not-found-page{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.not-found{
+  font-size: 1.1em;
+  font-weight: bolder;
 }
