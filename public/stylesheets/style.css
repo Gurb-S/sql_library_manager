@@ -1,6 +1,7 @@
 body {
   padding: 10px 50px 50px;
   font: 18px "Garamond", serif;
+  max-width: 872px;
 }
 
 a {
@@ -105,4 +106,32 @@ input[type=text] {
 .not-found{
   font-size: 1.1em;
   font-weight: bolder;
+}
+
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.nav p {
+  margin: 0%;
+  display: flex;
+}
+
+.search button {
+  cursor: pointer;
+  width: 55px;
+  border-radius: 0 4px 4px 0;
+  border: 1px solid #019875;
+  border-left: none;
+  padding: 0px 5px;
+  font-size: 14px;
+  background-color: #019875;
+  color: #fff;
+}
+
+.search button img {
+  width: 25px;
 }
