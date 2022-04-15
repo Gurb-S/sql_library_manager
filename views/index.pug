@@ -3,8 +3,10 @@ extends layout.pug
 block content 
 
   h1 Books
-  p 
-    a.button(href="/books/new") Create New Book 
+  .nav 
+    p
+      a.button(href="/books/new") Create New Book
+    include search.pug  
   table 
     tr 
       th Title 
