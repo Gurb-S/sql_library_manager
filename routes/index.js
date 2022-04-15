@@ -1,6 +1,8 @@
 var express = require('express');
+const db = require('../models');
 var router = express.Router();
 const { Book } = require('../models')
+const { Op } = db.Sequelize;
 
 function asyncHandler(cb){
   return async(req,res,next) => {
@@ -22,6 +24,44 @@ router.get('/', asyncHandler(async (req,res) => {
 router.get('/books', asyncHandler(async(req,res) =>{
   const books = await Book.findAll();
   res.render('index', { books });
+}));
+
+router.post('/books', asyncHandler(async(req,res) =>{
+  console.log(req.body.search);
+  const search = req.body.search;
+  try {
+    const books = await Book.findAll({
+        where: {
+        [Op.or]: [
+          {
+            title: {
+              [Op.like]: `%${search}%`
+            }
+          },
+          {
+            author: {
+              [Op.like]: `%${search}%`
+            }
+          },
+          {
+            genre: {
+              [Op.like]: `%${search}%`
+            },
+          },
+          {
+            year: {
+              [Op.like]: `%${search}%`
+            },
+          }
+        ]
+      }
+    });
+    res.render('index', { books })
+  } catch (error) {
+    res.render('page-not-found');
+  }
+
+  //console.log(books.map(book => book.toJSON()))
 }));
 
 router.get('/books/new', asyncHandler(async(req,res) =>{
