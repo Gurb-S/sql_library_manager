@@ -12,6 +12,7 @@ function asyncHandler(cb){
     }
   }
 }
+
 /* GET home page. */
 router.get('/', asyncHandler(async (req,res) => {
   res.redirect('/books');
@@ -20,11 +21,11 @@ router.get('/', asyncHandler(async (req,res) => {
 // Shows the full list of books
 router.get('/books', asyncHandler(async(req,res) =>{
   const books = await Book.findAll();
-  res.render('index', {books})
+  res.render('index', { books });
 }));
 
 router.get('/books/new', asyncHandler(async(req,res) =>{
-  res.render('new-book')
+  res.render('new-book');
 }));
 
 router.post('/books/new',asyncHandler(async(req,res) =>{
@@ -36,15 +37,14 @@ router.post('/books/new',asyncHandler(async(req,res) =>{
       genre: req.body.genre,
       year: req.body.year
     });
-    console.log(book.toJSON())
     res.redirect('/books')
   } catch (error) {
     if(error.name === 'SequelizeValidationError'){
-      const errors = error.errors.map(err => err.message);
       const errorsPath = error.errors.map(err => err.path);
-      console.error('Validation errors: ', errors)
-      console.log(errorsPath)
-      res.render('new-book', { errorsPath })
+      res.render('new-book', { errorsPath });
+    }
+    else{
+      throw error;
     }
   }
 
@@ -52,7 +52,13 @@ router.post('/books/new',asyncHandler(async(req,res) =>{
 
 router.get('/books/:id', asyncHandler(async(req,res) =>{
   const book = await Book.findByPk(req.params.id);
-  res.render('update-book',{ book })
+  if(book){
+    res.render('update-book',{ book });
+  }
+  else{
+    res.status(404).render('page-not-found')
+  }
+  
 }));
 
 router.post('/books/:id', asyncHandler(async(req,res) =>{
@@ -71,5 +77,7 @@ router.post('/books/:id/delete', asyncHandler(async(req,res) =>{
   await deleteBook.destroy();
   res.redirect('/');
 }));
+
+
 
 module.exports = router;
