@@ -22,7 +22,22 @@ router.get('/', asyncHandler(async (req,res) => {
 
 // Shows the full list of books
 router.get('/books', asyncHandler(async(req,res) =>{
-  const books = await Book.findAll();
+  const pageAsNumber = Number.parseInt(req.query.page);
+  const sizeAsNumber = Number.parseInt(req.query.size);
+
+  let page = 0;
+  if(!Number.isNaN(pageAsNumber) && pageAsNumber > 0){
+    page = pageAsNumber;
+  }
+
+  let size = 10;
+  if(!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && sizeAsNumber < 10){
+    size = sizeAsNumber
+  }
+  const books = await Book.findAll({
+    limit: size,
+    offset: page * size
+  });
   res.render('index', { books });
 }));
 
@@ -60,8 +75,6 @@ router.post('/books', asyncHandler(async(req,res) =>{
   } catch (error) {
     res.render('page-not-found');
   }
-
-  //console.log(books.map(book => book.toJSON()))
 }));
 
 router.get('/books/new', asyncHandler(async(req,res) =>{
