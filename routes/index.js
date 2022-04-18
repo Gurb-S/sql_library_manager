@@ -39,15 +39,32 @@ router.get('/books', asyncHandler(async(req,res) =>{
     limit: size,
     offset: page * size
   });
-
-  res.render('index', { books, page });
+  let morePages = true;
+  if(books.length !== size){
+    morePages = false;
+  }
+  res.render('index', { books, page, morePages });
 }));
 
 router.post('/books', asyncHandler(async(req,res) =>{
   console.log(req.body.search);
   const search = req.body.search;
+  const pageAsNumber = Number.parseInt(req.query.page);
+  const sizeAsNumber = Number.parseInt(req.query.size);
+
+  let page = 0;
+  if(!Number.isNaN(pageAsNumber) && pageAsNumber > 0){
+    page = pageAsNumber; 
+  }
+
+  let size = 10;
+  if(!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && sizeAsNumber < 10){
+    size = sizeAsNumber
+  }
   try {
     const books = await Book.findAll({
+      limit: size,
+      offset: page * size,
         where: {
         [Op.or]: [
           {
@@ -73,7 +90,11 @@ router.post('/books', asyncHandler(async(req,res) =>{
         ]
       }
     });
-    res.render('index', { books })
+    let morePages = true;
+    if(books.length !== size){
+      morePages = false;
+    }
+    res.render('index', { books, page, morePages });
   } catch (error) {
     res.render('page-not-found');
   }
