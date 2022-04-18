@@ -27,18 +27,20 @@ router.get('/books', asyncHandler(async(req,res) =>{
 
   let page = 0;
   if(!Number.isNaN(pageAsNumber) && pageAsNumber > 0){
-    page = pageAsNumber;
+    page = pageAsNumber; 
   }
 
   let size = 10;
   if(!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && sizeAsNumber < 10){
     size = sizeAsNumber
   }
+
   const books = await Book.findAll({
     limit: size,
     offset: page * size
   });
-  res.render('index', { books });
+
+  res.render('index', { books, page });
 }));
 
 router.post('/books', asyncHandler(async(req,res) =>{
