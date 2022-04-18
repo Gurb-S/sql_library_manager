@@ -135,3 +135,26 @@ input[type=text] {
 .search button img {
   width: 25px;
 }
+
+.link {
+  color: #D8B493;
+}
+
+.pag {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pag p {
+  margin: 10px;
+}
+
+.pag a {
+  margin: 10px;
+}
+
+.next {
+  margin-right: 10px;
+}
+
