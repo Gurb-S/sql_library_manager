@@ -1,4 +1,6 @@
 form.pag(method="post") 
-  a.link(href="/") Previous Page
-  p= page
-  a.link.next(href="/") Next Page 
+  if page > 0
+    a.link(href=`/books?page=${page-1}&size=8`) &larr; Previous Page 
+  p= page+1
+  if !table 
+    a.link.next(href=`/books?page=${page+1}&size=8`) Next Page &rarr;
