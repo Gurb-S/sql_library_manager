@@ -104,9 +104,13 @@ router.get('/books/new', asyncHandler(async(req,res) =>{
 }));
 
 router.post('/books/new',asyncHandler(async(req,res) =>{
+  const title = req.body.title;
+  const author = req.body.Author;
+  const genre = req.body.genre;
+  const year = req.body.year;
   try {
     const book = await Book.create({
-      title: req.body.title,
+      title: title,
       author: req.body.Author,
       genre: req.body.genre,
       year: req.body.year
@@ -115,7 +119,7 @@ router.post('/books/new',asyncHandler(async(req,res) =>{
   } catch (error) {
     if(error.name === 'SequelizeValidationError'){
       const errorsPath = error.errors.map(err => err.path);
-      res.render('new-book', { errorsPath });
+      res.render('new-book', { errorsPath, title, author, genre, year });
     }
     else{
       throw error;
