@@ -7,16 +7,28 @@ block content
       form(method="post") 
         p 
           label(for="title") Title 
-          input(name="title" type="text" id="title") 
+          if  errorsPath 
+            input(name="title" type="text" id="title" value=`${title}`) 
+          else 
+            input(name="title" type="text" id="title") 
         p 
           label(for="author") Author 
-          input(name="Author" type="text" id="author")
+          if errorsPath 
+            input(name="Author" type="text" id="author" value=`${author}`)
+          else 
+            input(name="Author" type="text" id="author")
         p 
           label(for="genre") Genre 
-          input(name="genre" type="text" id="genre")
+          if errorsPath
+            input(name="genre" type="text" id="genre" value=`${genre}`)
+          else
+            input(name="genre" type="text" id="genre")
         p 
           label(for="year") Year 
-          input(name="year" type="text" id="year") 
+          if errorsPath 
+            input(name="year" type="text" id="year" value=`${year}`) 
+          else 
+            input(name="year" type="text" id="year")
         p 
           input(type="submit" value="Create New Book")
         p 
