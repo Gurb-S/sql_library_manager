@@ -47,7 +47,6 @@ router.get('/books', asyncHandler(async(req,res) =>{
 }));
 
 router.post('/books', asyncHandler(async(req,res) =>{
-  console.log(req.body.search);
   const search = req.body.search;
   const pageAsNumber = Number.parseInt(req.query.page);
   const sizeAsNumber = Number.parseInt(req.query.size);
@@ -106,7 +105,6 @@ router.get('/books/new', asyncHandler(async(req,res) =>{
 
 router.post('/books/new',asyncHandler(async(req,res) =>{
   try {
-    console.log('INITIAL BODY', req.body);
     const book = await Book.create({
       title: req.body.title,
       author: req.body.Author,
