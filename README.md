@@ -4,6 +4,8 @@ A book managing app built on Node.js that allows a user to preform CRUD operatio
 
 ## Installation
 
+### In the project directory, run:
+
 Step 1: `npm install`
 
 Step 2: `npm start`
