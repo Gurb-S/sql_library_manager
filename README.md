@@ -9,4 +9,4 @@ Step 1: `npm install`
 Step 2: `npm start`
 
 Runs the app in the development mode.
-Opens http://localhost:3000
+Open http://localhost:3000 in your browser to view.
